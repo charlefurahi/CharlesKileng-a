@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaDownload } from "react-icons/fa";
+import { useActiveSection } from "../hooks/useActiveSection";
+import resume from "../assets/Chifu_Kilenga_Resume.pdf";
 
 const NAV_ITEMS = [
   { id: "hero", label: "Home" },
@@ -9,10 +11,12 @@ const NAV_ITEMS = [
   { id: "projects", label: "Projects" },
   { id: "contact", label: "Contact" },
 ];
+const NAV_IDS = NAV_ITEMS.map((n) => n.id);
 
 function NavigationBar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const active = useActiveSection(NAV_IDS);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -35,15 +39,24 @@ function NavigationBar() {
 
         <ul className="nav-links">
           {NAV_ITEMS.map((item) => (
-            <li key={item.id} className="nav-link" onClick={() => scrollToSection(item.id)}>
+            <li
+              key={item.id}
+              className={`nav-link ${active === item.id ? "active" : ""}`}
+              onClick={() => scrollToSection(item.id)}
+            >
               {item.label}
             </li>
           ))}
         </ul>
 
-        <button className="nav-hamburger" onClick={() => setMenuOpen(true)} aria-label="Open menu">
-          <FaBars />
-        </button>
+        <div className="nav-right">
+          <a href={resume} download className="btn btn-outline nav-resume-btn">
+            <FaDownload /> Resume
+          </a>
+          <button className="nav-hamburger" onClick={() => setMenuOpen(true)} aria-label="Open menu">
+            <FaBars />
+          </button>
+        </div>
       </nav>
 
       <AnimatePresence>
@@ -58,10 +71,17 @@ function NavigationBar() {
             <button className="nav-close-btn" onClick={() => setMenuOpen(false)} aria-label="Close menu">
               <FaTimes />
             </button>
-            {NAV_ITEMS.map((item) => (
-              <span key={item.id} className="nav-link" onClick={() => scrollToSection(item.id)}>
+            {NAV_ITEMS.map((item, i) => (
+              <motion.span
+                key={item.id}
+                className={`nav-link ${active === item.id ? "active" : ""}`}
+                onClick={() => scrollToSection(item.id)}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.06 }}
+              >
                 {item.label}
-              </span>
+              </motion.span>
             ))}
           </motion.div>
         )}

@@ -1,0 +1,48 @@
+import { FaHome, FaChurch, FaRobot, FaTint } from "react-icons/fa";
+
+export const projects = [
+  {
+    name: "NyumbaLink",
+    desc: "A property rental & listing platform for Tanzania built with Django REST Framework — JWT auth, role-based permissions, geolocation search, and Cloudinary media.",
+    tags: ["Django", "DRF", "PostgreSQL", "Celery", "Redis"],
+    github: "#",
+    live: "#",
+    icon: FaHome,
+    colorFrom: "#4338ca",
+    colorTo: "#7c3aed",
+    pattern: "grid",
+  },
+  {
+    name: "GolaniSDA Church Website",
+    desc: "A full-stack church platform with a Vue 3 + Tailwind frontend and Django backend — Stripe donations, media gallery, and a custom admin console.",
+    tags: ["Vue 3", "Django REST", "Tailwind", "Stripe"],
+    github: "#",
+    live: "https://golanisda.org",
+    icon: FaChurch,
+    colorFrom: "#b45309",
+    colorTo: "#7c2d12",
+    pattern: "dots",
+  },
+  {
+    name: "AI Student Support Assistant",
+    desc: "A university project pairing a FastAPI backend with a local Ollama LLM and a Gradio interface to answer student queries.",
+    tags: ["FastAPI", "Ollama", "Gradio", "Python"],
+    github: "#",
+    live: "#",
+    icon: FaRobot,
+    colorFrom: "#0e7490",
+    colorTo: "#1e3a8a",
+    pattern: "circuit",
+  },
+  {
+    name: "Smart Water Tank Automation",
+    desc: "An Arduino-based system using an HX711 load cell for tank level sensing, with tare calibration and pump failsafe logic.",
+    tags: ["Arduino", "C++", "HX711", "IoT"],
+    github: "#",
+    live: "#",
+    icon: FaTint,
+    colorFrom: "#0369a1",
+    colorTo: "#0891b2",
+    pattern: "waves",
+  },
+];
