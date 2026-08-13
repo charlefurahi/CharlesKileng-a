@@ -1,20 +1,21 @@
+import { Routes, Route } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
-import HeroSection from "./components/HeroSection";
-import AboutSection from "./components/AboutSection";
-import SkillsSection from "./components/SkillsSection";
-import ProjectsSection from "./components/ProjectsSection";
-import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import ProjectsPage from "./pages/ProjectsPage";
+import BlogPage from "./pages/BlogPage";
+import ResourcesPage from "./pages/ResourcesPage";
 
 function App() {
   return (
     <>
       <NavigationBar />
-      <HeroSection />
-      <AboutSection />
-      <SkillsSection />
-      <ProjectsSection />
-      <ContactSection />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/resources" element={<ResourcesPage />} />
+      </Routes>
       <Footer />
     </>
   );
