@@ -1,22 +1,20 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaBars, FaTimes, FaDownload } from "react-icons/fa";
-import { useActiveSection } from "../hooks/useActiveSection";
+import { Link, useLocation } from "react-router-dom";
+import { FaBars, FaTimes, FaDownload, FaHome } from "react-icons/fa";
 import resume from "../assets/Chifu_Kilenga_Resume.pdf";
+import ckPhoto from "../assets/ck.png";
 
 const NAV_ITEMS = [
-  { id: "hero", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
+  { to: "/projects", label: "Projects" },
+  { to: "/blog", label: "Blog" },
+  { to: "/resources", label: "Resources" },
 ];
-const NAV_IDS = NAV_ITEMS.map((n) => n.id);
 
 function NavigationBar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const active = useActiveSection(NAV_IDS);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -25,29 +23,33 @@ function NavigationBar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setMenuOpen(false);
-  };
+  useEffect(() => setMenuOpen(false), [pathname]);
 
   return (
     <>
       <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
-        <div className="nav-logo" onClick={() => scrollToSection("hero")}>
-          Kileng'a <span className="gradient-text">Charles</span>
-        </div>
+        <Link to="/" className="nav-avatar" aria-label="Home">
+          <img src={ckPhoto} alt="Charles Kileng'a" />
+        </Link>
 
-        <ul className="nav-links">
+        <div className="nav-pill">
+          <Link
+            to="/"
+            className={`nav-pill-home ${pathname === "/" ? "active" : ""}`}
+            aria-label="Home"
+          >
+            <FaHome />
+          </Link>
           {NAV_ITEMS.map((item) => (
-            <li
-              key={item.id}
-              className={`nav-link ${active === item.id ? "active" : ""}`}
-              onClick={() => scrollToSection(item.id)}
+            <Link
+              key={item.to}
+              to={item.to}
+              className={`nav-link ${pathname === item.to ? "active" : ""}`}
             >
               {item.label}
-            </li>
+            </Link>
           ))}
-        </ul>
+        </div>
 
         <div className="nav-right">
           <a href={resume} download className="btn btn-outline nav-resume-btn">
@@ -71,18 +73,24 @@ function NavigationBar() {
             <button className="nav-close-btn" onClick={() => setMenuOpen(false)} aria-label="Close menu">
               <FaTimes />
             </button>
+            <Link to="/" className="nav-link" onClick={() => setMenuOpen(false)}>
+              Home
+            </Link>
             {NAV_ITEMS.map((item, i) => (
               <motion.span
-                key={item.id}
-                className={`nav-link ${active === item.id ? "active" : ""}`}
-                onClick={() => scrollToSection(item.id)}
+                key={item.to}
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.06 }}
               >
-                {item.label}
+                <Link to={item.to} className="nav-link" onClick={() => setMenuOpen(false)}>
+                  {item.label}
+                </Link>
               </motion.span>
             ))}
+            <a href={resume} download className="btn btn-primary" onClick={() => setMenuOpen(false)}>
+              <FaDownload /> Resume
+            </a>
           </motion.div>
         )}
       </AnimatePresence>

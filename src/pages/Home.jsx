@@ -1,8 +1,9 @@
 import HeroSection from "../components/HeroSection";
 import AboutSection from "../components/AboutSection";
 import SkillsSection from "../components/SkillsSection";
-import ExperienceSection from "../components/ExperienceSection";
+import FoundationSection from "../components/FoundationSection";
 import ProjectsSection from "../components/ProjectsSection";
+import ExperienceSection from "../components/ExperienceSection";
 import ContactSection from "../components/ContactSection";
 
 function Home() {
@@ -11,8 +12,9 @@ function Home() {
       <HeroSection />
       <AboutSection />
       <SkillsSection />
-      <ExperienceSection />
+      <FoundationSection />
       <ProjectsSection limit={3} showViewAll />
+      <ExperienceSection />
       <ContactSection />
     </>
   );

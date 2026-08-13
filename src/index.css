@@ -189,3 +189,43 @@ a { color: inherit; }
 .timeline-date { font-size: 0.8rem; color: var(--text-dim); background: rgba(255, 255, 255, 0.05); padding: 4px 12px; border-radius: 999px; border: 1px solid var(--border); white-space: nowrap; }
 .timeline-desc { color: var(--text-dim); font-size: 0.95rem; line-height: 1.7; margin: 10px 0 14px; padding-left: 18px; }
 .timeline-desc li { margin-bottom: 6px; }
+/* Nav: avatar + pill (replaces old text logo layout) */
+.nav-avatar { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; border: 2px solid var(--border); flex-shrink: 0; }
+.nav-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.nav-pill { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 999px; padding: 6px 10px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.nav-pill-home { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; color: var(--text-dim); transition: background var(--transition), color var(--transition); }
+.nav-pill-home:hover, .nav-pill-home.active { background: var(--gradient); color: #fff; }
+.nav-pill .nav-link { padding: 8px 16px; border-radius: 999px; font-size: 0.9rem; }
+.nav-pill .nav-link::after { display: none; }
+.nav-pill .nav-link:hover { color: #fff; background: rgba(255,255,255,0.06); }
+.nav-pill .nav-link.active { color: #fff; background: var(--gradient); }
+
+@media (max-width: 768px) {
+  .nav-pill { display: none; }
+}
+
+/* About: photo + bio */
+.about-photo-wrap { position: relative; display: flex; justify-content: center; }
+.about-photo-glow { position: absolute; inset: 10%; background: var(--gradient); border-radius: 32px; filter: blur(50px); opacity: 0.35; z-index: 0; }
+.about-photo { position: relative; z-index: 1; width: 100%; max-width: 360px; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--radius-lg); border: 3px solid rgba(255,255,255,0.1); }
+
+/* Foundation: technical skills + education */
+.foundation { background: linear-gradient(180deg, var(--bg-alt), var(--bg)); }
+.foundation-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: start; }
+@media (max-width: 900px) { .foundation-grid { grid-template-columns: 1fr; } }
+.foundation-col-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0 0 20px; }
+
+.tech-category { margin-bottom: 28px; }
+.tech-category:last-child { margin-bottom: 0; }
+.tech-category-title { font-size: 0.9rem; font-weight: 600; color: var(--text-dim); margin: 0 0 12px; }
+.tech-badges { display: flex; flex-wrap: wrap; gap: 10px; }
+.tech-badge { font-size: 0.85rem; padding: 7px 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); color: var(--text-dim); transition: border-color var(--transition), color var(--transition), transform var(--transition); }
+.tech-badge:hover { border-color: var(--accent-1); color: #fff; transform: translateY(-2px); }
+
+.education-list { display: flex; flex-direction: column; gap: 20px; }
+.education-card { padding: 24px; }
+.edu-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+.edu-degree { color: #fff; font-size: 1.05rem; font-weight: 600; margin: 0 0 4px; }
+.edu-school { color: var(--accent-1); font-size: 0.92rem; font-weight: 500; }
+.edu-grade-badge { font-size: 0.78rem; color: var(--text-dim); background: rgba(255,255,255,0.05); padding: 4px 12px; border-radius: 999px; border: 1px solid var(--border); white-space: nowrap; }
