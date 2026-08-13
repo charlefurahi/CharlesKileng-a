@@ -1,17 +1,35 @@
-import { FaWhatsapp, FaEnvelope } from "react-icons/fa";
+import { FaWhatsapp, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+
+const CONTACTS = [
+  { icon: <FaWhatsapp />, label: "WhatsApp", value: "+255 755 794 664", href: "https://wa.me/255755794664" },
+  { icon: <FaEnvelope />, label: "Email", value: "charlefurahi@gmail.com", href: "mailto:charlefurahi@gmail.com" },
+  { icon: <FaMapMarkerAlt />, label: "Location", value: "Dar es Salaam, Tanzania", href: "#" },
+];
 
 function ContactSection() {
   return (
-    <section style={{ padding: "80px 8%", background: "#0b0b0f", textAlign: "center" }}>
-      <h2 style={{ color: "#fff", fontSize: "2.4rem" }}>Contact Me</h2>
-
-      <p style={{ color: "#aaa", marginTop: "16px" }}>
-        Let’s work together
+    <section id="contact" className="section contact">
+      <h2 className="section-title">Let's Work Together</h2>
+      <p className="section-subtitle">
+        Have a project in mind or just want to say hi? I'm open to freelance work, collaborations, and new opportunities.
       </p>
 
-      <div style={{ marginTop: "30px", fontSize: "1.2rem", color: "#fff" }}>
-        <p><FaWhatsapp /> 0755 794 664</p>
-        <p><FaEnvelope /> charlefurahi@gmail.com</p>
+      <div className="contact-grid">
+        {CONTACTS.map((c) => {
+          const isLink = c.href !== "#";
+          const Tag = isLink ? "a" : "div";
+          return (
+            <Tag
+              key={c.label}
+              {...(isLink ? { href: c.href, target: c.href.startsWith("http") ? "_blank" : undefined, rel: "noreferrer" } : {})}
+              className="card contact-card"
+            >
+              <div className="icon">{c.icon}</div>
+              <div className="label">{c.label}</div>
+              <div className="value">{c.value}</div>
+            </Tag>
+          );
+        })}
       </div>
     </section>
   );

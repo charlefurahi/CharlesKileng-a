@@ -1,124 +1,65 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { FaDownload, FaArrowDown } from "react-icons/fa";
 import heroImage from "../assets/MaryChalesk.jpg";
 import resume from "../assets/Chifu_Kilenga_Resume.pdf";
 
+const ROLES = ["Web Developer", "Graphic Designer", "Hardware Technician", "Pianist"];
+
 function HeroSection() {
+  const [roleIndex, setRoleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => setRoleIndex((i) => (i + 1) % ROLES.length), 2400);
+    return () => clearInterval(interval);
+  }, []);
+
+  const scrollTo = (id) => (e) => {
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section
-      id="hero"
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexWrap: "wrap",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "60px 8%",
-        background: "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
-        color: "#fff",
-      }}
-    >
-      {/* LEFT SIDE TEXT */}
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.7 }}
-        style={{
-          flex: "1 1 350px",
-          maxWidth: "600px",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-      >
-        {/* Big Headline */}
-        <h1
-          style={{
-            fontSize: "3rem",
-            fontWeight: "700",
-            marginBottom: "20px",
-            lineHeight: "1.2",
-          }}
+    <section id="hero" className="hero-section">
+      <div className="hero">
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7 }}
+          className="hero-text"
         >
-          Hi! I Charles Kileng'a
-        </h1>
+          <span className="hero-eyebrow">Available for freelance & collaboration</span>
+          <h1 className="hero-title">Hi, I'm Charles Kileng'a</h1>
+          <p className="hero-role gradient-text">{ROLES[roleIndex]}</p>
+          <p className="hero-desc">
+            A technical problem solver by day and a creative designer by heart. Whether I'm
+            reviving hardware, building web apps, or composing digital experiences, I build with
+            precision.
+          </p>
 
-        {/* Sub-headline */}
-        <p
-          style={{
-            fontSize: "1.3rem",
-            marginBottom: "30px",
-            color: "#ccc",
-            lineHeight: "1.6",
-          }}
+          <div className="hero-actions">
+            <a href="#projects" className="btn btn-primary" onClick={scrollTo("projects")}>
+              View My Work
+            </a>
+            <a href={resume} download className="btn btn-outline">
+              <FaDownload /> Resume
+            </a>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7 }}
+          className="hero-image-wrap"
         >
-          I’m <strong>Charles Kileng'a</strong>—a technical problem solver by day
-          and a creative designer by heart. Whether I'm reviving hardware or
-          composing digital experiences, I build with precision.
-        </p>
+          <div className="hero-image-glow" />
+          <img src={heroImage} alt="Charles Kileng'a" className="hero-image" />
+        </motion.div>
+      </div>
 
-        {/* Buttons / CTAs */}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "16px" }}>
-          {/* Primary CTA */}
-          <a href="#projects" style={{ textDecoration: "none" }}>
-            <button
-              style={{
-                padding: "12px 28px",
-                borderRadius: "30px",
-                border: "none",
-                background: "linear-gradient(135deg,#667eea,#764ba2)",
-                color: "#fff",
-                fontWeight: "600",
-                cursor: "pointer",
-                transition: "all 0.3s ease",
-              }}
-              onMouseEnter={(e) =>
-                (e.target.style.transform = "translateY(-3px)")
-              }
-              onMouseLeave={(e) => (e.target.style.transform = "translateY(0)")}
-            >
-              View My Projects
-            </button>
-          </a>
-
-          {/* Secondary CTA */}
-          <a
-            href="#contact"
-            style={{
-              color: "#fff",
-              fontWeight: "500",
-              textDecoration: "underline",
-              fontSize: "1.1rem",
-              alignSelf: "center",
-            }}
-          >
-            Let's Chat
-          </a>
-        </div>
-      </motion.div>
-
-      {/* RIGHT SIDE IMAGE */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.7 }}
-        style={{
-          flex: "1 1 300px",
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "30px",
-        }}
-      >
-        <img
-          src={heroImage}
-          alt="Chifu Kilenga"
-          style={{
-            width: "280px",
-            height: "280px",
-            borderRadius: "50%",
-            objectFit: "cover",
-            border: "3px solid #fff",
-          }}
-        />
+      <motion.div className="scroll-cue" animate={{ y: [0, 8, 0] }} transition={{ duration: 1.6, repeat: Infinity }}>
+        <FaArrowDown />
       </motion.div>
     </section>
   );

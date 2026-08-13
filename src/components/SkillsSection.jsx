@@ -1,62 +1,33 @@
 import { motion } from "framer-motion";
+import { FaCode, FaPaintBrush, FaVideo, FaTools, FaMusic } from "react-icons/fa";
+
+const SKILLS = [
+  { icon: <FaCode />, title: "Web Development", desc: "Building responsive, full-stack web apps with React, Django REST Framework, and modern JavaScript." },
+  { icon: <FaPaintBrush />, title: "Graphic Design", desc: "Creating branding, posters, and social media content using Adobe Photoshop and Inkscape." },
+  { icon: <FaVideo />, title: "Video & Photo Editing", desc: "Editing promotional videos, reels, and event photography into polished final content." },
+  { icon: <FaTools />, title: "Hardware & OS Maintenance", desc: "Diagnosing hardware issues, OS installation, system recovery, and data backups." },
+  { icon: <FaMusic />, title: "Piano & Music", desc: "Performing piano — a creative outlet that sharpens focus and discipline." },
+];
 
 function SkillsSection() {
-  const skills = [
-    { title: "Frontend Development", desc: "React, HTML, CSS, JS", grad: "#141E30,#243B55" },
-    { title: "Full Stack Developer", desc: "APIs, Databases, Systems", grad: "#000428,#004e92" },
-    { title: "Graphic Design", desc: "Photoshop & Canva", grad: "#232526,#414345", button: true },
-    { title: "Computer Repair", desc: "Hardware & Software Fixing", grad: "#0f2027,#203a43" },
-    { title: "Pianist", desc: "Keyboard & Piano Performance", grad: "#1c1c1c,#434343" },
-  ];
-
   return (
-    <section id="skills" style={{ padding: "80px 8%", background: "#0b0b0f" }}>
-      <h2 style={{ textAlign: "center", color: "#fff", fontSize: "2.4rem", marginBottom: "50px" }}>
-        Skills & Talents
-      </h2>
+    <section id="skills" className="section skills">
+      <h2 className="section-title">Skills & Talents</h2>
+      <p className="section-subtitle">A mix of technical and creative abilities I bring to every project.</p>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-          gap: "24px",
-        }}
-      >
-        {skills.map((s, i) => (
+      <div className="skills-grid container">
+        {SKILLS.map((s, i) => (
           <motion.div
-            key={i}
-            whileHover={{ scale: 1.05 }}
-            initial={{ opacity: 0, y: 40 }}
+            key={s.title}
+            className="card skill-card"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, delay: i * 0.05 }}
             viewport={{ once: true }}
-            style={{
-              padding: "24px",
-              borderRadius: "18px",
-              background: `linear-gradient(135deg,${s.grad})`,
-              color: "#fff",
-              textAlign: "center",
-            }}
           >
-            <h3 style={{ marginBottom: "12px" }}>{s.title}</h3>
+            <div className="skill-icon">{s.icon}</div>
+            <h3>{s.title}</h3>
             <p>{s.desc}</p>
-
-            {s.button && (
-              <button
-                style={{
-                  marginTop: "14px",
-                  padding: "8px 18px",
-                  borderRadius: "20px",
-                  border: "none",
-                  cursor: "pointer",
-                  background: "linear-gradient(135deg,#667eea,#764ba2)",
-                  color: "#fff",
-                  fontWeight: "600",
-                }}
-              >
-                View My Works
-              </button>
-            )}
           </motion.div>
         ))}
       </div>

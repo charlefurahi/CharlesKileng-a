@@ -1,106 +1,72 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaBars, FaTimes } from "react-icons/fa";
 
+const NAV_ITEMS = [
+  { id: "hero", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Projects" },
+  { id: "contact", label: "Contact" },
+];
+
 function NavigationBar() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const scrollToSection = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-      if (isMobile) setMenuOpen(false);
-    }
-  };
-
-  const styles = {
-    navbar: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      padding: "16px 8%",
-      backgroundColor: "#111",
-      color: "#fff",
-      position: "sticky",
-      top: 0,
-      zIndex: 1000,
-      fontFamily: "Poppins, sans-serif",
-    },
-    logo: { fontWeight: "bold", fontSize: "1.5rem", cursor: "pointer" },
-    menu: {
-      display: isMobile ? (menuOpen ? "flex" : "none") : "flex",
-      flexDirection: isMobile ? "column" : "row",
-      gap: "20px",
-      marginTop: isMobile ? "16px" : "0",
-      textAlign: isMobile ? "center" : "left",
-    },
-    link: {
-      color: "#fff",
-      textDecoration: "none",
-      fontWeight: "500",
-      cursor: "pointer",
-      transition: "color 0.3s",
-    },
-    linkHover: {
-      color: "#667eea",
-    },
-    hamburger: {
-      display: isMobile ? "block" : "none",
-      cursor: "pointer",
-      fontSize: "1.5rem",
-    },
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setMenuOpen(false);
   };
 
   return (
-    <nav style={styles.navbar}>
-      <div style={styles.logo} onClick={() => scrollToSection("hero")}>
-        Kileng'a Charles
-      </div>
+    <>
+      <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
+        <div className="nav-logo" onClick={() => scrollToSection("hero")}>
+          Kileng'a <span className="gradient-text">Charles</span>
+        </div>
 
-      <div style={styles.hamburger} onClick={() => setMenuOpen(!menuOpen)}>
-        {menuOpen ? <FaTimes /> : <FaBars />}
-      </div>
+        <ul className="nav-links">
+          {NAV_ITEMS.map((item) => (
+            <li key={item.id} className="nav-link" onClick={() => scrollToSection(item.id)}>
+              {item.label}
+            </li>
+          ))}
+        </ul>
 
-      <div style={styles.menu}>
-        <span
-          style={styles.link}
-          onClick={() => scrollToSection("hero")}
-        >
-          Home
-        </span>
-        <span
-          style={styles.link}
-          onClick={() => scrollToSection("about")}
-        >
-          About
-        </span>
-        <span
-          style={styles.link}
-          onClick={() => scrollToSection("skills")}
-        >
-          Skills
-        </span>
-        <span
-          style={styles.link}
-          onClick={() => scrollToSection("projects")}
-        >
-          Projects
-        </span>
-        <span
-          style={styles.link}
-          onClick={() => scrollToSection("contact")}
-        >
-          Contact
-        </span>
-      </div>
-    </nav>
+        <button className="nav-hamburger" onClick={() => setMenuOpen(true)} aria-label="Open menu">
+          <FaBars />
+        </button>
+      </nav>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="nav-mobile-menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            <button className="nav-close-btn" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+              <FaTimes />
+            </button>
+            {NAV_ITEMS.map((item) => (
+              <span key={item.id} className="nav-link" onClick={() => scrollToSection(item.id)}>
+                {item.label}
+              </span>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
