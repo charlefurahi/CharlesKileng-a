@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { technicalSkills } from "../data/technicalSkills";
+import { technicalSkills } from "../data/techncalSkills";
 import { education } from "../data/education";
 
 function FoundationSection() {
