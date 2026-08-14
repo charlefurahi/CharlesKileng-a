@@ -10,9 +10,8 @@ import {
   FaSun,
   FaMoon,
 } from "react-icons/fa6";
-
-import resume from "../assets/Charles_Kilenga_CV.pdf";
-import ckPhoto from "../assets/MaryChalesk.jpg";
+import resume from "../assets/Chifu_Kilenga_Resume.pdf";
+import ckPhoto from "../assets/ck.png";
 
 const NAV_ITEMS = [
   { to: "/projects", label: "Projects" },
@@ -27,14 +26,9 @@ function NavigationBar({ theme, toggleTheme }) {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 28);
-
     onScroll();
-
     window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -44,23 +38,15 @@ function NavigationBar({ theme, toggleTheme }) {
   return (
     <>
       <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
-        {/* PROFILE */}
-        <Link
-          to="/"
-          className="nav-avatar"
-          aria-label="Charles Kilenga — Home"
-        >
+        <Link to="/" className="nav-avatar" aria-label="Charles Kilenga — Home">
           <img src={ckPhoto} alt="Charles Kilenga" />
           <span className="nav-online-dot" />
         </Link>
 
-        {/* CENTER NAVIGATION */}
         <div className="nav-pill">
           <Link
             to="/"
-            className={`nav-pill-home ${
-              pathname === "/" ? "active" : ""
-            }`}
+            className={`nav-pill-home ${pathname === "/" ? "active" : ""}`}
             aria-label="Home"
           >
             <FaHouse />
@@ -70,43 +56,29 @@ function NavigationBar({ theme, toggleTheme }) {
             <Link
               key={item.to}
               to={item.to}
-              className={`nav-link ${
-                pathname === item.to ? "active" : ""
-              }`}
+              className={`nav-link ${pathname === item.to ? "active" : ""}`}
             >
               {item.label}
             </Link>
           ))}
         </div>
 
-        {/* RIGHT SIDE */}
         <div className="nav-right">
-
-          {/* THEME SWITCHER */}
           <button
+            type="button"
             className="theme-toggle"
             onClick={toggleTheme}
-            aria-label={`Switch to ${
-              theme === "dark" ? "light" : "dark"
-            } theme`}
-            title={`Switch to ${
-              theme === "dark" ? "light" : "dark"
-            } theme`}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            title={theme === "dark" ? "Light mode" : "Dark mode"}
           >
             {theme === "dark" ? <FaSun /> : <FaMoon />}
           </button>
 
-          {/* DOWNLOAD CV */}
-          <a
-            href={resume}
-            download
-            className="btn btn-outline nav-resume-btn"
-          >
+          <a href={resume} download className="btn btn-outline nav-resume-btn">
             <span>Download CV</span>
             <FaDownload />
           </a>
 
-          {/* MOBILE MENU */}
           <button
             className="nav-hamburger"
             onClick={() => setMenuOpen(true)}
@@ -117,7 +89,6 @@ function NavigationBar({ theme, toggleTheme }) {
         </div>
       </nav>
 
-      {/* MOBILE MENU */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -139,11 +110,7 @@ function NavigationBar({ theme, toggleTheme }) {
               <span>Charles Kilenga</span>
             </div>
 
-            <Link
-              to="/"
-              className="nav-link"
-              onClick={() => setMenuOpen(false)}
-            >
+            <Link to="/" className="nav-link" onClick={() => setMenuOpen(false)}>
               Home
             </Link>
 
@@ -164,17 +131,13 @@ function NavigationBar({ theme, toggleTheme }) {
               </motion.span>
             ))}
 
-            {/* MOBILE THEME BUTTON */}
             <button
+              type="button"
               className="mobile-theme-toggle"
               onClick={toggleTheme}
             >
               {theme === "dark" ? <FaSun /> : <FaMoon />}
-              <span>
-                {theme === "dark"
-                  ? "Light Mode"
-                  : "Dark Mode"}
-              </span>
+              <span>{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>
             </button>
 
             <a
@@ -183,8 +146,7 @@ function NavigationBar({ theme, toggleTheme }) {
               className="btn btn-primary mobile-resume"
               onClick={() => setMenuOpen(false)}
             >
-              Download CV
-              <FaArrowUpRightFromSquare />
+              Download CV <FaArrowUpRightFromSquare />
             </a>
           </motion.div>
         )}
