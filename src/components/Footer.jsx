@@ -38,7 +38,7 @@ function Footer() {
         <a href="mailto:charlefurahi@gmail.com" style={styles.link}><FaEnvelope /></a>
       </div>
 
-      <p>© {new Date().getFullYear()} Chifu Kilenga. All rights reserved.</p>
+      <p>© {new Date().getFullYear()} Charles Kileng'a. All rights reserved.</p>
     </footer>
   );
 }
