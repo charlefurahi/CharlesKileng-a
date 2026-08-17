@@ -2330,3 +2330,144 @@ body {
     height: 40px;
   }
 }
+/* =========================================================
+   MOBILE NAV OVERLAY — POLISH PASS
+   Append this block to the END of your existing stylesheet.
+   Nothing above it needs to change — these rules only extend
+   / override .nav-close-btn, .nav-mobile-menu and the links,
+   resume button, and theme toggle that live inside it, so the
+   hamburger overlay finally matches the glass + gradient look
+   the rest of the 2026 refresh already uses.
+   ========================================================= */
+
+/* Close button: same circular glass treatment as .theme-toggle
+   and .nav-pill-home, instead of the old plain text "X" */
+.nav-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  transition: transform var(--transition), border-color var(--transition),
+    color var(--transition), background var(--transition);
+}
+.nav-close-btn:hover {
+  transform: rotate(90deg);
+  border-color: var(--accent-1);
+  color: var(--accent-1);
+  background: rgba(102, 126, 234, 0.1);
+}
+
+/* Overlay panel: atmospheric gradient + blur instead of flat
+   black, with a soft scale/fade entrance */
+.nav-mobile-menu {
+  gap: 14px;
+  padding: 90px 28px 50px;
+  background: radial-gradient(
+      ellipse 60% 45% at 80% 15%,
+      rgba(118, 75, 162, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 55% 40% at 10% 85%,
+      rgba(102, 126, 234, 0.14),
+      transparent 60%
+    ),
+    rgba(8, 8, 12, 0.98);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  opacity: 0;
+  animation: navMobileFadeIn 0.32s ease forwards;
+}
+@keyframes navMobileFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* If an avatar is reused inside the overlay for identity, keep
+   it modest so it doesn't compete with the links */
+.nav-mobile-menu .nav-avatar {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 6px;
+}
+
+/* Links (Home + the rest): proper pill hit-targets, a hover
+   state, and a gradient highlight for whichever page is active
+   — same visual language as the desktop .nav-pill links */
+.nav-mobile-menu .nav-link {
+  position: relative;
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 11px 28px;
+  border-radius: 999px;
+  color: var(--text-dim);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: navMobileLinkIn 0.4s ease forwards;
+  transition: color var(--transition), background var(--transition);
+}
+.nav-mobile-menu .nav-link::after {
+  display: none; /* pill background replaces the underline here */
+}
+.nav-mobile-menu .nav-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+.nav-mobile-menu .nav-link.active {
+  color: #fff;
+  background: var(--gradient);
+  box-shadow: 0 10px 26px rgba(102, 126, 234, 0.25);
+}
+.nav-mobile-menu .nav-link:nth-of-type(1) { animation-delay: 0.06s; }
+.nav-mobile-menu .nav-link:nth-of-type(2) { animation-delay: 0.11s; }
+.nav-mobile-menu .nav-link:nth-of-type(3) { animation-delay: 0.16s; }
+.nav-mobile-menu .nav-link:nth-of-type(4) { animation-delay: 0.21s; }
+.nav-mobile-menu .nav-link:nth-of-type(5) { animation-delay: 0.26s; }
+.nav-mobile-menu .nav-link:nth-of-type(6) { animation-delay: 0.31s; }
+.nav-mobile-menu .nav-link:nth-of-type(7) { animation-delay: 0.36s; }
+@keyframes navMobileLinkIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Resume button + theme toggle: give them their own settled
+   spot below the links instead of floating loose in the stack */
+.nav-mobile-menu .nav-resume-btn {
+  display: inline-flex;
+  margin-top: 18px;
+}
+.nav-mobile-menu .mobile-theme-toggle {
+  margin-top: 6px;
+}
+
+/* Never let the overlay linger if the viewport grows past mobile */
+@media (min-width: 769px) {
+  .nav-mobile-menu {
+    display: none !important;
+  }
+}
+
+/* Light theme parity for the new bits (background/base overlay
+   colour is already handled by your existing light-theme rule) */
+[data-theme="light"] .nav-close-btn {
+  border-color: var(--border);
+  background: rgba(31, 36, 50, 0.04);
+}
+[data-theme="light"] .nav-close-btn:hover {
+  background: rgba(102, 126, 234, 0.08);
+}
+[data-theme="light"] .nav-mobile-menu .nav-link:hover {
+  background: rgba(31, 36, 50, 0.05);
+}
