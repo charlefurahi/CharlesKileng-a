@@ -26,12 +26,12 @@ function AboutSection() {
           </p>
           <p>
             Over the past two years I've worked across teams at <strong>UDICTI Finhub</strong>,{" "}
-            <strong>StarHub Africa</strong>, and now <strong>TRA–PSSSF</strong> — building everything from a property
+            <strong>StarHub Africa</strong>, and now <strong>Tanzania Revenue Authority(TRA)–PSSSF</strong> — building everything from a property
             rental platform and a church community site to a patient-appointment platform, while getting hands-on
             with hardware maintenance and cybersecurity tools like Snort and Nmap.
           </p>
           <p>
-            Alongside code, I design in Figma and Canva, and I'm growing my skills in embedded systems and network
+            Alongside code, I design in Figma, Canva, Adobe Photoshop, Illustrator and Premier Pro. And I'm growing my skills in embedded systems and network
             security — aiming to be equally comfortable in the interface, the codebase, and the hardware underneath it.
           </p>
         </div>
