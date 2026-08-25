@@ -115,22 +115,6 @@ function HeroSection() {
               </div>
             </div>
           </div>
-
-          <div className="hero-floating-card hero-floating-card-top">
-            <span className="floating-icon"><FaCircleCheck /></span>
-            <div>
-              <strong>Problem solver</strong>
-              <small>from idea to implementation</small>
-            </div>
-          </div>
-
-          <div className="hero-floating-card hero-floating-card-bottom">
-            <span className="floating-number">04</span>
-            <div>
-              <strong>Ways I create</strong>
-              <small>Code · Design · Hardware · Music</small>
-            </div>
-          </div>
         </motion.div>
       </div>
 
