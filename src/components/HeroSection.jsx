@@ -118,43 +118,28 @@ return (
       animate={{ opacity: 1, x: 0, scale: 1 }}
       transition={{ duration: 0.75, delay: 0.08 }}
     >
-      <div className="hero-profile-card">
-        <div className="hero-profile-top">
-          <span className="profile-label">PORTFOLIO / 2026</span>
-          <span className="profile-dot" aria-hidden="true" />
+      <div className="hero-image-wrap">
+        <div className="hero-image-glow" aria-hidden="true" />
+
+        <div className="hero-image-ring">
+          <img
+            src={heroImage}
+            alt="Charles Kilenga"
+            className="hero-image"
+          />
         </div>
 
-        <div className="hero-image-wrap">
-          <div className="hero-image-glow" aria-hidden="true" />
+        <div className="hero-welcome">
+          <h2 className="hero-welcome-title">
+            Hey, welcome
+            <span className="hero-welcome-wave" aria-hidden="true">
+              👋
+            </span>
+          </h2>
 
-          <div className="hero-image-ring">
-            <img
-              src={heroImage}
-              alt="Charles Kilenga"
-              className="hero-image"
-            />
-          </div>
-        </div>
-
-        <div className="hero-profile-info">
-          <div>
-            <strong>Charles Kilenga</strong>
-            <span>Developer · Designer · Engineer</span>
-          </div>
-
-          <span className="profile-index">01</span>
-        </div>
-
-        <div className="hero-mini-grid">
-          <div>
-            <strong>04+</strong>
-            <span>Core roles</span>
-          </div>
-
-          <div>
-            <strong>∞</strong>
-            <span>Curiosity</span>
-          </div>
+          <p className="hero-welcome-text">
+            I’m Charles — glad you stopped by.
+          </p>
         </div>
       </div>
     </motion.div>
