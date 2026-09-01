@@ -1000,7 +1000,10 @@ a {
   border: 1px solid var(--border);
   white-space: nowrap;
 }
-/* ========================================================= MODERN 2026 REFRESH Keeps the original purple palette and dark theme. ========================================================= */
+
+/* =========================================================
+   MODERN 2026 REFRESH
+   ========================================================= */
 
 :root {
   --accent-1: #667eea;
@@ -2330,18 +2333,11 @@ body {
     height: 40px;
   }
 }
+
 /* =========================================================
    MOBILE NAV OVERLAY — POLISH PASS
-   Append this block to the END of your existing stylesheet.
-   Nothing above it needs to change — these rules only extend
-   / override .nav-close-btn, .nav-mobile-menu and the links,
-   resume button, and theme toggle that live inside it, so the
-   hamburger overlay finally matches the glass + gradient look
-   the rest of the 2026 refresh already uses.
    ========================================================= */
 
-/* Close button: same circular glass treatment as .theme-toggle
-   and .nav-pill-home, instead of the old plain text "X" */
 .nav-close-btn {
   display: flex;
   align-items: center;
@@ -2361,8 +2357,6 @@ body {
   background: rgba(102, 126, 234, 0.1);
 }
 
-/* Overlay panel: atmospheric gradient + blur instead of flat
-   black, with a soft scale/fade entrance */
 .nav-mobile-menu {
   gap: 14px;
   padding: 90px 28px 50px;
@@ -2393,17 +2387,12 @@ body {
   }
 }
 
-/* If an avatar is reused inside the overlay for identity, keep
-   it modest so it doesn't compete with the links */
 .nav-mobile-menu .nav-avatar {
   width: 56px;
   height: 56px;
   margin-bottom: 6px;
 }
 
-/* Links (Home + the rest): proper pill hit-targets, a hover
-   state, and a gradient highlight for whichever page is active
-   — same visual language as the desktop .nav-pill links */
 .nav-mobile-menu .nav-link {
   position: relative;
   font-size: 1.25rem;
@@ -2417,7 +2406,7 @@ body {
   transition: color var(--transition), background var(--transition);
 }
 .nav-mobile-menu .nav-link::after {
-  display: none; /* pill background replaces the underline here */
+  display: none;
 }
 .nav-mobile-menu .nav-link:hover {
   color: #fff;
@@ -2442,8 +2431,6 @@ body {
   }
 }
 
-/* Resume button + theme toggle: give them their own settled
-   spot below the links instead of floating loose in the stack */
 .nav-mobile-menu .nav-resume-btn {
   display: inline-flex;
   margin-top: 18px;
@@ -2452,15 +2439,12 @@ body {
   margin-top: 6px;
 }
 
-/* Never let the overlay linger if the viewport grows past mobile */
 @media (min-width: 769px) {
   .nav-mobile-menu {
     display: none !important;
   }
 }
 
-/* Light theme parity for the new bits (background/base overlay
-   colour is already handled by your existing light-theme rule) */
 [data-theme="light"] .nav-close-btn {
   border-color: var(--border);
   background: rgba(31, 36, 50, 0.04);
@@ -2470,4 +2454,62 @@ body {
 }
 [data-theme="light"] .nav-mobile-menu .nav-link:hover {
   background: rgba(31, 36, 50, 0.05);
+}
+
+/* =========================================================
+   SIDEBAR & APP LAYOUT STYLES
+   ========================================================= */
+
+.app {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+}
+
+.sidebar {
+  width: 280px;
+  min-width: 280px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background: var(--bg-alt);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px 24px;
+  z-index: 100;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .navbar {
+    left: calc(280px + clamp(14px, 3vw, 42px));
+  }
+  
+  .navbar .nav-logo {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .sidebar {
+    display: none;
+  }
+  
+  .navbar {
+    left: clamp(14px, 3vw, 42px);
+  }
+}
+
+[data-theme="light"] .sidebar {
+  background: var(--theme-bg-alt);
+  border-right-color: var(--theme-border);
 }
