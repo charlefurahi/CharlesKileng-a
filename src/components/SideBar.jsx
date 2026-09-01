@@ -9,8 +9,7 @@ import {
   FaXmark,
 } from "react-icons/fa6";
 
-import ckPhoto from "../assets/ck.png";
-import resume from "../assets/Chifu_Kilenga_Resume.pdf";
+import resume from "../assets/Charles_Kilenga_CV";
 
 const SIDEBAR_ITEMS = [
   {
@@ -35,12 +34,17 @@ const SIDEBAR_ITEMS = [
   },
 ];
 
-function Sidebar({ theme, toggleTheme, isOpen = false, onClose }) {
+function Sidebar({
+  theme,
+  toggleTheme,
+  isOpen = false,
+  onClose,
+}) {
   const { pathname } = useLocation();
 
   return (
     <>
-      {/* Backdrop: only relevant on mobile/tablet, when the sidebar is opened via the navbar button */}
+      {/* Mobile backdrop */}
       {isOpen && (
         <div
           className="sidebar-backdrop"
@@ -49,33 +53,35 @@ function Sidebar({ theme, toggleTheme, isOpen = false, onClose }) {
         />
       )}
 
-      <aside className={`portfolio-sidebar ${isOpen ? "open" : ""}`}>
+      <aside
+        className={`portfolio-sidebar ${
+          isOpen ? "open" : ""
+        }`}
+      >
+        {/* =====================================================
+            TOP
+        ====================================================== */}
         <div className="sidebar-top">
-          <div className="sidebar-top-row">
+
+          {/* Brand */}
+          <div className="sidebar-brand-row">
             <Link
               to="/"
-              className="sidebar-profile"
+              className="sidebar-brand"
               aria-label="Charles Kilenga Home"
               onClick={onClose}
             >
-              <div className="sidebar-avatar-wrap">
-                <img
-                  src={ckPhoto}
-                  alt="Charles Kilenga"
-                  className="sidebar-avatar"
-                />
-                <span
-                  className="sidebar-online-dot"
-                  aria-label="Available"
-                />
+              <div className="sidebar-brand-mark">
+                <span>CK</span>
               </div>
 
-              <div className="sidebar-profile-text">
+              <div className="sidebar-brand-copy">
                 <strong>Charles Kilenga</strong>
                 <span>Developer & Designer</span>
               </div>
             </Link>
 
+            {/* Mobile close */}
             <button
               type="button"
               className="sidebar-close-btn"
@@ -86,13 +92,23 @@ function Sidebar({ theme, toggleTheme, isOpen = false, onClose }) {
             </button>
           </div>
 
+          {/* Small section label */}
+          <div className="sidebar-section-label">
+            <span>Navigation</span>
+          </div>
+
+          {/* Navigation */}
           <nav
             className="sidebar-navigation"
             aria-label="Sidebar navigation"
           >
             {SIDEBAR_ITEMS.map((item) => {
               const Icon = item.icon;
-              const isActive = pathname === item.to;
+
+              const isActive =
+                pathname === item.to ||
+                (item.to !== "/" &&
+                  pathname.startsWith(`${item.to}/`));
 
               return (
                 <Link
@@ -101,18 +117,47 @@ function Sidebar({ theme, toggleTheme, isOpen = false, onClose }) {
                   className={`sidebar-link ${
                     isActive ? "active" : ""
                   }`}
-                  aria-current={isActive ? "page" : undefined}
+                  aria-current={
+                    isActive ? "page" : undefined
+                  }
                   onClick={onClose}
                 >
-                  <Icon aria-hidden="true" />
-                  <span>{item.label}</span>
+                  <span className="sidebar-link-icon">
+                    <Icon aria-hidden="true" />
+                  </span>
+
+                  <span className="sidebar-link-label">
+                    {item.label}
+                  </span>
+
+                  {isActive && (
+                    <span
+                      className="sidebar-active-dot"
+                      aria-hidden="true"
+                    />
+                  )}
                 </Link>
               );
             })}
           </nav>
         </div>
 
+        {/* =====================================================
+            BOTTOM
+        ====================================================== */}
         <div className="sidebar-bottom">
+
+          {/* Available status */}
+          <div className="sidebar-status">
+            <span className="sidebar-status-dot" />
+
+            <div>
+              <strong>Available for work</strong>
+              <span>Let's build something great.</span>
+            </div>
+          </div>
+
+          {/* Theme */}
           <button
             type="button"
             className="sidebar-theme-toggle"
@@ -123,19 +168,26 @@ function Sidebar({ theme, toggleTheme, isOpen = false, onClose }) {
                 : "Switch to dark mode"
             }
           >
-            {theme === "dark" ? (
-              <FaSun aria-hidden="true" />
-            ) : (
-              <FaMoon aria-hidden="true" />
-            )}
+            <span className="sidebar-theme-icon">
+              {theme === "dark" ? (
+                <FaSun aria-hidden="true" />
+              ) : (
+                <FaMoon aria-hidden="true" />
+              )}
+            </span>
 
             <span>
               {theme === "dark"
                 ? "Light Mode"
                 : "Dark Mode"}
             </span>
+
+            <span className="sidebar-theme-arrow">
+              →
+            </span>
           </button>
 
+          {/* CV */}
           <a
             href={resume}
             download
@@ -143,9 +195,13 @@ function Sidebar({ theme, toggleTheme, isOpen = false, onClose }) {
             aria-label="Download Charles Kilenga CV"
           >
             <span>Download CV</span>
-            <FaArrowUpRightFromSquare aria-hidden="true" />
+
+            <FaArrowUpRightFromSquare
+              aria-hidden="true"
+            />
           </a>
 
+          {/* Footer */}
           <p className="sidebar-footer">
             © {new Date().getFullYear()} Charles Kilenga
           </p>

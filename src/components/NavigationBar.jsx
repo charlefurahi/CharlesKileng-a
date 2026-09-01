@@ -8,7 +8,7 @@ import {
   FaSun,
 } from "react-icons/fa6";
 
-import resume from "../assets/Chifu_Kilenga_Resume.pdf";
+import resume from "../assets/Charles_Kilenga_CV.pdf";
 import ckPhoto from "../assets/ck.png";
 
 const NAV_ITEMS = [

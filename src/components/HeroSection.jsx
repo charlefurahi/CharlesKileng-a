@@ -7,7 +7,7 @@ FaCircleCheck,
 FaDownload,
 } from "react-icons/fa6";
 import heroImage from "../assets/MaryChalesk.jpg";
-import resume from "../assets/Chifu_Kilenga_Resume.pdf";
+import resume from "../assets/Charles_Kilenga_CV.pdf";
 
 const ROLES = [
 "Web Developer",
@@ -106,7 +106,7 @@ return (
         <div className="hero-tech-pills">
           <span>React</span>
           <span>Web</span>
-          <span>Hardware</span>
+          <span>Vue</span>
           <span>Design</span>
         </div>
       </div>
