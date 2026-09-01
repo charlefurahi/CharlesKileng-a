@@ -9,7 +9,7 @@ import {
   FaXmark,
 } from "react-icons/fa6";
 
-import resume from "../assets/Charles_Kilenga_CV";
+import resume from "../assets/Charles_Kilenga_CV.pdf";
 
 const SIDEBAR_ITEMS = [
   {
