@@ -37,20 +37,34 @@ function NavigationBar({ theme, toggleTheme, onOpenSidebar }) {
     };
   }, []);
 
+  const isDark = theme === "dark";
+
   return (
     <nav
-      className={`navbar ${scrolled ? "scrolled" : ""}`}
+      className={`navbar ${scrolled ? "scrolled" : ""} ${
+        isDark ? "navbar-dark" : "navbar-light"
+      }`}
       aria-label="Main navigation"
     >
+      {/* =====================================================
+          PROFILE / LOGO
+      ====================================================== */}
       <Link
         to="/"
         className="nav-avatar"
         aria-label="Charles Kilenga Home"
       >
         <img src={ckPhoto} alt="Charles Kilenga" />
-        <span className="nav-online-dot" aria-hidden="true" />
+
+        <span
+          className="nav-online-dot"
+          aria-hidden="true"
+        />
       </Link>
 
+      {/* =====================================================
+          DESKTOP NAVIGATION
+      ====================================================== */}
       <div className="nav-pill">
         <Link
           to="/"
@@ -58,7 +72,9 @@ function NavigationBar({ theme, toggleTheme, onOpenSidebar }) {
             pathname === "/" ? "active" : ""
           }`}
           aria-label="Home"
-          aria-current={pathname === "/" ? "page" : undefined}
+          aria-current={
+            pathname === "/" ? "page" : undefined
+          }
         >
           <FaHouse aria-hidden="true" />
         </Link>
@@ -70,8 +86,12 @@ function NavigationBar({ theme, toggleTheme, onOpenSidebar }) {
             <Link
               key={item.to}
               to={item.to}
-              className={`nav-link ${isActive ? "active" : ""}`}
-              aria-current={isActive ? "page" : undefined}
+              className={`nav-link ${
+                isActive ? "active" : ""
+              }`}
+              aria-current={
+                isActive ? "page" : undefined
+              }
             >
               {item.label}
             </Link>
@@ -79,42 +99,56 @@ function NavigationBar({ theme, toggleTheme, onOpenSidebar }) {
         })}
       </div>
 
+      {/* =====================================================
+          RIGHT SIDE ACTIONS
+      ====================================================== */}
       <div className="nav-right">
+
+        {/* Theme Toggle */}
         <button
           type="button"
           className="theme-toggle"
           onClick={toggleTheme}
           aria-label={
-            theme === "dark"
+            isDark
               ? "Switch to light mode"
               : "Switch to dark mode"
           }
-          title={theme === "dark" ? "Light mode" : "Dark mode"}
+          title={
+            isDark
+              ? "Switch to light mode"
+              : "Switch to dark mode"
+          }
         >
-          {theme === "dark" ? (
+          {isDark ? (
             <FaSun aria-hidden="true" />
           ) : (
             <FaMoon aria-hidden="true" />
           )}
         </button>
 
+        {/* Download CV */}
         <a
           href={resume}
           download
-          className="btn btn-outline nav-resume-btn"
+          className={`btn btn-outline nav-resume-btn ${
+            isDark
+              ? "nav-resume-dark"
+              : "nav-resume-light"
+          }`}
           aria-label="Download Charles Kilenga CV"
         >
           <span>Download CV</span>
           <FaDownload aria-hidden="true" />
         </a>
 
-        {/* Opens the Sidebar as an on-demand drawer — sidebar owns its own
-            close button + backdrop, so this button only needs to open it. */}
+        {/* Mobile / Tablet Menu */}
         <button
           type="button"
           className="nav-hamburger"
           onClick={onOpenSidebar}
           aria-label="Open navigation menu"
+          aria-expanded="false"
         >
           <FaBars aria-hidden="true" />
         </button>
