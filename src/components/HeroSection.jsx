@@ -6,6 +6,7 @@ FaArrowRight,
 FaCircleCheck,
 FaDownload,
 } from "react-icons/fa6";
+
 import heroImage from "../assets/MaryChalesk.jpg";
 import resume from "../assets/Charles_Kilenga_CV.pdf";
 
@@ -21,7 +22,9 @@ const [roleIndex, setRoleIndex] = useState(0);
 
 useEffect(() => {
 const interval = setInterval(() => {
-setRoleIndex((currentIndex) => (currentIndex + 1) % ROLES.length);
+setRoleIndex(
+(currentIndex) => (currentIndex + 1) % ROLES.length
+);
 }, 2400);
 
 return () => clearInterval(interval);
@@ -40,11 +43,23 @@ document.getElementById(id)?.scrollIntoView({
 
 return (
 <section id="hero" className="hero-section">
-<div className="hero-orb hero-orb-one" aria-hidden="true" />
-<div className="hero-orb hero-orb-two" aria-hidden="true" />
-<div className="hero-grid-lines" aria-hidden="true" />
+<div
+className="hero-orb hero-orb-one"
+aria-hidden="true"
+/>
+
+  <div
+    className="hero-orb hero-orb-two"
+    aria-hidden="true"
+  />
+
+  <div
+    className="hero-grid-lines"
+    aria-hidden="true"
+  />
 
   <div className="hero">
+    {/* ================= TEXT CONTENT ================= */}
     <motion.div
       className="hero-text"
       initial={{ opacity: 0, y: 30 }}
@@ -53,7 +68,9 @@ return (
     >
       <div className="hero-status">
         <FaCircleCheck aria-hidden="true" />
-        <span>Available for freelance & collaboration</span>
+        <span>
+          Available for freelance & collaboration
+        </span>
       </div>
 
       <p className="hero-kicker">
@@ -62,21 +79,28 @@ return (
 
       <h1 className="hero-title">
         I build{" "}
-        <span className="gradient-text">digital experiences</span>{" "}
+        <span className="gradient-text">
+          digital experiences
+        </span>{" "}
         that work.
       </h1>
 
       <p className="hero-role">
-        <span className="role-label">Currently:</span>{" "}
-        <span className="gradient-text" aria-live="polite">
+        <span className="role-label">
+          Currently:
+        </span>{" "}
+        <span
+          className="gradient-text"
+          aria-live="polite"
+        >
           {ROLES[roleIndex]}
         </span>
       </p>
 
       <p className="hero-desc">
-        I'm Charles Kilenga — a technical problem solver combining
-        software, hardware, design, and security to turn practical ideas
-        into useful digital products.
+        I'm Charles Kilenga — a technical problem solver
+        combining software, hardware, design, and security
+        to turn practical ideas into useful digital products.
       </p>
 
       <div className="hero-actions">
@@ -112,14 +136,39 @@ return (
       </div>
     </motion.div>
 
+    {/* ================= IMAGE CONTENT ================= */}
     <motion.div
       className="hero-visual"
       initial={{ opacity: 0, x: 35, scale: 0.96 }}
       animate={{ opacity: 1, x: 0, scale: 1 }}
-      transition={{ duration: 0.75, delay: 0.08 }}
+      transition={{
+        duration: 0.75,
+        delay: 0.08,
+      }}
     >
+      {/* HELLO / WELCOME - IWE JUU YA PICHA */}
+      <div className="hero-welcome">
+        <h2 className="hero-welcome-title">
+          Hey, welcome
+          <span
+            className="hero-welcome-wave"
+            aria-hidden="true"
+          >
+            👋
+          </span>
+        </h2>
+
+        <p className="hero-welcome-text">
+          I’m Charles — glad you stopped by.
+        </p>
+      </div>
+
+      {/* IMAGE */}
       <div className="hero-image-wrap">
-        <div className="hero-image-glow" aria-hidden="true" />
+        <div
+          className="hero-image-glow"
+          aria-hidden="true"
+        />
 
         <div className="hero-image-ring">
           <img
@@ -128,24 +177,15 @@ return (
             className="hero-image"
           />
         </div>
-
-        <div className="hero-welcome">
-          <h2 className="hero-welcome-title">
-            Hey, welcome
-            <span className="hero-welcome-wave" aria-hidden="true">
-              👋
-            </span>
-          </h2>
-
-          <p className="hero-welcome-text">
-            I’m Charles — glad you stopped by.
-          </p>
-        </div>
       </div>
     </motion.div>
   </div>
 
-  <div className="hero-services" aria-label="Areas of work">
+  {/* ================= SERVICES ================= */}
+  <div
+    className="hero-services"
+    aria-label="Areas of work"
+  >
     <div className="hero-services-track">
       <span>WEB DEVELOPMENT</span>
       <i aria-hidden="true">✦</i>
@@ -169,6 +209,7 @@ return (
     </div>
   </div>
 
+  {/* ================= SCROLL CUE ================= */}
   <motion.a
     href="#about"
     className="scroll-cue"
