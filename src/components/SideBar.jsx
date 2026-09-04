@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa6";
 
 import resume from "../assets/Charles_Kilenga_CV.pdf";
+import "./SideBar.css";
 
 const SIDEBAR_ITEMS = [
   {

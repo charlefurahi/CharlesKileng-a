@@ -1,0 +1,211 @@
+/* =====================================================
+   Navigation Bar
+   Desktop: full link row, no sidebar.
+   Mobile / tablet: collapses to a hamburger that opens
+   the Sidebar (see SideBar.css for the breakpoint match).
+====================================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.9rem clamp(1.25rem, 4vw, 2.5rem);
+  font-family: "Inter", sans-serif;
+  transition: background 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.navbar-dark {
+  color: #f5f1ea;
+  background: transparent;
+}
+
+.navbar-dark.scrolled {
+  background: rgba(20, 17, 13, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.navbar-light {
+  color: #14110d;
+  background: transparent;
+}
+
+.navbar-light.scrolled {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- brand / avatar ---------- */
+.nav-avatar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.nav-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #eaa33d;
+}
+
+.nav-online-dot {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #3ddc84;
+  border: 2px solid currentColor;
+}
+
+/* ---------- desktop link row ---------- */
+.nav-pill {
+  display: flex;
+  align-items: center;
+  gap: 1.85rem;
+}
+
+.nav-link {
+  position: relative;
+  padding: 0.25rem 0;
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.72;
+  transition: opacity 0.2s ease;
+}
+
+.nav-link:hover {
+  opacity: 1;
+}
+
+.nav-link.active {
+  opacity: 1;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 2px;
+  background: #eaa33d;
+}
+
+/* ---------- right side actions ---------- */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-shrink: 0;
+}
+
+.theme-toggle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(128, 128, 128, 0.28);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  border-color: #eaa33d;
+  color: #eaa33d;
+}
+
+.nav-resume-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid;
+  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-resume-btn:hover {
+  transform: translateY(-1px);
+}
+
+.nav-resume-dark {
+  border-color: rgba(245, 241, 234, 0.28);
+  color: #f5f1ea;
+}
+
+.nav-resume-dark:hover {
+  border-color: #eaa33d;
+  color: #eaa33d;
+}
+
+.nav-resume-light {
+  border-color: rgba(20, 17, 13, 0.22);
+  color: #14110d;
+}
+
+.nav-resume-light:hover {
+  border-color: #b97a1c;
+  color: #b97a1c;
+}
+
+/* Mobile / tablet menu button — hidden on desktop by default */
+.nav-hamburger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(128, 128, 128, 0.28);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* =====================================================
+   Breakpoint: below this width, the link row disappears
+   and the hamburger (→ Sidebar) takes over.
+====================================================== */
+@media (max-width: 900px) {
+  .nav-pill {
+    display: none;
+  }
+
+  .nav-resume-btn {
+    display: none;
+  }
+
+  .nav-hamburger {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-avatar img {
+    width: 34px;
+    height: 34px;
+  }
+}

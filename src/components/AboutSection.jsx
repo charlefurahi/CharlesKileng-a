@@ -9,7 +9,7 @@ const STATS = [
 function AboutSection() {
   return (
     <section id="about" className="section about">
-      <h2 className="section-title">About You</h2>
+      <h2 className="section-title">About Me</h2>
       <p className="section-subtitle">A short introduction to my background, what I do, and how I think about the work.</p>
 
       <div className="about-grid container">

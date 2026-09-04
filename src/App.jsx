@@ -11,78 +11,117 @@ import BlogPage from "./pages/BlogPage";
 import ResourcesPage from "./pages/ResourcesPage";
 
 function App() {
-const [theme, setTheme] = useState(() =>
-localStorage.getItem("portfolio-theme") || "dark"
-);
-const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [theme, setTheme] = useState(() =>
+    localStorage.getItem("portfolio-theme") || "dark"
+  );
 
-useEffect(() => {
-document.documentElement.setAttribute("data-theme", theme);
-localStorage.setItem("portfolio-theme", theme);
-}, [theme]);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-useEffect(() => {
-document.body.style.overflow = sidebarOpen ? "hidden" : "";
-return () => {
-document.body.style.overflow = "";
-};
-}, [sidebarOpen]);
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      "data-theme",
+      theme
+    );
 
-useEffect(() => {
-if (!sidebarOpen) return;
+    localStorage.setItem(
+      "portfolio-theme",
+      theme
+    );
+  }, [theme]);
 
-const handleKeyDown = (event) => {
-if (event.key === "Escape") {
-setSidebarOpen(false);
-}
-};
+  useEffect(() => {
+    document.body.style.overflow =
+      sidebarOpen ? "hidden" : "";
 
-document.addEventListener("keydown", handleKeyDown);
-return () => document.removeEventListener("keydown", handleKeyDown);
-}, [sidebarOpen]);
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [sidebarOpen]);
 
-const toggleTheme = () => {
-setTheme((current) =>
-current === "dark" ? "light" : "dark"
-);
-};
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setSidebarOpen(false);
+      }
+    };
 
-const openSidebar = () => setSidebarOpen(true);
-const closeSidebar = () => setSidebarOpen(false);
+    if (sidebarOpen) {
+      document.addEventListener(
+        "keydown",
+        handleKeyDown
+      );
+    }
 
-return (
-<div className="app">
-{/* Sidebar: always present on desktop, opens on demand on mobile/tablet */}
-<Sidebar
-theme={theme}
-toggleTheme={toggleTheme}
-isOpen={sidebarOpen}
-onClose={closeSidebar}
-/>
+    return () => {
+      document.removeEventListener(
+        "keydown",
+        handleKeyDown
+      );
+    };
+  }, [sidebarOpen]);
 
-  {/* Main Application */}
-  <div className="main-content">
-    {/* Mobile / Tablet Navigation */}
-    <NavigationBar
-      theme={theme}
-      toggleTheme={toggleTheme}
-      onOpenSidebar={openSidebar}
-    />
+  const toggleTheme = () => {
+    setTheme((currentTheme) =>
+      currentTheme === "dark"
+        ? "light"
+        : "dark"
+    );
+  };
 
-    <main>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/blog" element={<BlogPage />} />
-        <Route path="/resources" element={<ResourcesPage />} />
-      </Routes>
-    </main>
+  const openSidebar = () => {
+    setSidebarOpen(true);
+  };
 
-    <Footer />
-  </div>
-</div>
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
 
-);
+  return (
+    <div className="app">
+      {/* Desktop and mobile navigation */}
+      <NavigationBar
+        theme={theme}
+        toggleTheme={toggleTheme}
+        onOpenSidebar={openSidebar}
+      />
+
+      {/* Sidebar is used only on small screens */}
+      <Sidebar
+        theme={theme}
+        toggleTheme={toggleTheme}
+        isOpen={sidebarOpen}
+        onClose={closeSidebar}
+      />
+
+      <div className="main-content">
+        <main>
+          <Routes>
+            <Route
+              path="/"
+              element={<Home />}
+            />
+
+            <Route
+              path="/projects"
+              element={<ProjectsPage />}
+            />
+
+            <Route
+              path="/blog"
+              element={<BlogPage />}
+            />
+
+            <Route
+              path="/resources"
+              element={<ResourcesPage />}
+            />
+          </Routes>
+        </main>
+
+        <Footer />
+      </div>
+    </div>
+  );
 }
 
 export default App;

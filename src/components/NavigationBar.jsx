@@ -3,15 +3,16 @@ import { Link, useLocation } from "react-router-dom";
 import {
   FaBars,
   FaDownload,
-  FaHouse,
   FaMoon,
   FaSun,
 } from "react-icons/fa6";
 
 import resume from "../assets/Charles_Kilenga_CV.pdf";
 import ckPhoto from "../assets/ck.png";
+import "./NavigationBar.css";
 
 const NAV_ITEMS = [
+  { to: "/", label: "Home" },
   { to: "/projects", label: "Projects" },
   { to: "/blog", label: "Blog" },
   { to: "/resources", label: "Resources" },
@@ -63,22 +64,10 @@ function NavigationBar({ theme, toggleTheme, onOpenSidebar }) {
       </Link>
 
       {/* =====================================================
-          DESKTOP NAVIGATION
+          DESKTOP NAVIGATION — every page link lives here.
+          Hidden on mobile/tablet in favor of the sidebar.
       ====================================================== */}
       <div className="nav-pill">
-        <Link
-          to="/"
-          className={`nav-pill-home ${
-            pathname === "/" ? "active" : ""
-          }`}
-          aria-label="Home"
-          aria-current={
-            pathname === "/" ? "page" : undefined
-          }
-        >
-          <FaHouse aria-hidden="true" />
-        </Link>
-
         {NAV_ITEMS.map((item) => {
           const isActive = pathname === item.to;
 
@@ -142,7 +131,8 @@ function NavigationBar({ theme, toggleTheme, onOpenSidebar }) {
           <FaDownload aria-hidden="true" />
         </a>
 
-        {/* Mobile / Tablet Menu */}
+        {/* Mobile / Tablet Menu — opens the Sidebar, which carries
+            every page link. Only visible below the nav-pill breakpoint. */}
         <button
           type="button"
           className="nav-hamburger"
