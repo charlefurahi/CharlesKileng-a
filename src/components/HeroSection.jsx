@@ -59,12 +59,63 @@ aria-hidden="true"
   />
 
   <div className="hero">
-    {/* ================= TEXT CONTENT ================= */}
+    {/* ================= TOP: WELCOME ================= */}
+    <motion.div
+      className="hero-welcome"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <h2 className="hero-welcome-title">
+        Hey, welcome
+        <span
+          className="hero-welcome-wave"
+          aria-hidden="true"
+        >
+          👋
+        </span>
+      </h2>
+
+      <p className="hero-welcome-text">
+        I’m Charles — glad you stopped by.
+      </p>
+    </motion.div>
+
+    {/* ================= MIDDLE: IMAGE ================= */}
+    <motion.div
+      className="hero-visual"
+      initial={{ opacity: 0, scale: 0.96 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: 0.75,
+        delay: 0.08,
+      }}
+    >
+      <div className="hero-image-wrap">
+        <div
+          className="hero-image-glow"
+          aria-hidden="true"
+        />
+
+        <div className="hero-image-ring">
+          <img
+            src={heroImage}
+            alt="Charles Kilenga"
+            className="hero-image"
+          />
+        </div>
+      </div>
+    </motion.div>
+
+    {/* ================= BELOW IMAGE: MAIN CONTENT ================= */}
     <motion.div
       className="hero-text"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7 }}
+      transition={{
+        duration: 0.7,
+        delay: 0.15,
+      }}
     >
       <div className="hero-status">
         <FaCircleCheck aria-hidden="true" />
@@ -132,50 +183,6 @@ aria-hidden="true"
           <span>Web</span>
           <span>Vue</span>
           <span>Design</span>
-        </div>
-      </div>
-    </motion.div>
-
-    {/* ================= IMAGE CONTENT ================= */}
-    <motion.div
-      className="hero-visual"
-      initial={{ opacity: 0, x: 35, scale: 0.96 }}
-      animate={{ opacity: 1, x: 0, scale: 1 }}
-      transition={{
-        duration: 0.75,
-        delay: 0.08,
-      }}
-    >
-      {/* HELLO / WELCOME - IWE JUU YA PICHA */}
-      <div className="hero-welcome">
-        <h2 className="hero-welcome-title">
-          Hey, welcome
-          <span
-            className="hero-welcome-wave"
-            aria-hidden="true"
-          >
-            👋
-          </span>
-        </h2>
-
-        <p className="hero-welcome-text">
-          I’m Charles — glad you stopped by.
-        </p>
-      </div>
-
-      {/* IMAGE */}
-      <div className="hero-image-wrap">
-        <div
-          className="hero-image-glow"
-          aria-hidden="true"
-        />
-
-        <div className="hero-image-ring">
-          <img
-            src={heroImage}
-            alt="Charles Kilenga"
-            className="hero-image"
-          />
         </div>
       </div>
     </motion.div>
